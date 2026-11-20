@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المعالم السياحية في الأردن</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #f8f5f0;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        /* ===== الهيدر ===== */
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)),
+                        url('https://images.unsplash.com/photo-1551171128-c5b124a4174c?w=1600&q=80') center/cover no-repeat;
+            height: 100vh;
+            min-height: 550px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            max-width: 700px;
+            margin-bottom: 35px;
+            opacity: 0.95;
+        }
+
+        .hero-btn {
+            background: #D2691E;
+            color: white;
+            padding: 14px 35px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .hero-btn:hover {
+            background: #8B4513;
+            transform: scale(1.05);
+        }
+
+        /* ===== القائمة ===== */
+        nav {
+            background: #5D3A1A;
+            padding: 14px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-weight: 500;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        nav a:hover {
+            background: #D2691E;
+            color: white;
+        }
+
+        /* ===== الأقسام ===== */
+        .section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 80px 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.4rem;
+            color: #8B4513;
+            margin-bottom: 15px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 50px;
+            font-size: 1.15rem;
+        }
+
+        /* بطاقات المعالم في الصفحة الرئيسية */
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+        }
+
+        .card-body {
+            padding: 22px;
+        }
+
+        .card h3 {
+            color: #8B4513;
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: #555;
+            font-size: 0.98rem;
+            margin-bottom: 18px;
+        }
+
+        .card a {
+            display: inline-block;
+            background: #D2691E;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: background 0.3s;
+        }
+
+        .card a:hover {
+            background: #8B4513;
+        }
+
+        /* تفاصيل كل معلم */
+        .attraction {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+            margin-bottom: 60px;
+        }
+
+        .attraction-header {
+            height: 320px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+
+        .attraction-header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.7));
+        }
+
+        .attraction-header h2 {
+            position: absolute;
+            bottom: 25px;
+            right: 30px;
+            color: white;
+            font-size: 2.3rem;
+            z-index: 2;
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.5);
+        }
+
+        .attraction-content {
+            padding: 40px;
+        }
+
+        .info-box {
+            background: #fff8f0;
+            border-right: 5px solid #D2691E;
+            padding: 18px 25px;
+            margin: 25px 0;
+            border-radius: 0 12px 12px 0;
+            font-size: 1.02rem;
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 18px;
+            margin: 30px 0;
+        }
+
+        .gallery img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .gallery img:hover {
+            transform: scale(1.03);
+        }
+
+        .tips {
+            background: #f0f7f4;
+            border-radius: 12px;
+            padding: 20px 25px;
+            margin-top: 25px;
+        }
+
+        .tips h4 {
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        /* ===== الفوتر ===== */
+        footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        footer p {
+            opacity: 0.9;
+        }
+
+        /* ===== تجاوب ===== */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.3rem;
+            }
+            .hero p {
+                font-size: 1.1rem;
+            }
+            .section-title {
+                font-size: 1.9rem;
+            }
+            .attraction-header {
+                height: 240px;
+            }
+            .attraction-header h2 {
+                font-size: 1.7rem;
+                right: 20px;
+                bottom: 18px;
+            }
+            .attraction-content {
+                padding: 25px;
+            }
+            nav a {
+                padding: 6px 12px;
+                font-size: 0.95rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== الهيدر الرئيسي ===== -->
+    <header class="hero" id="home">
+        <h1>المعالم السياحية في الأردن</h1>
+        <p>اكتشف أجمل الوجهات التاريخية والطبيعية في المملكة الأردنية الهاشمية</p>
+        <a href="#attractions" class="hero-btn">استكشف المعالم</a>
+    </header>
+
+    <!-- ===== القائمة ===== -->
+    <nav>
+        <ul>
+            <li><a href="#home">الرئيسية</a></li>
+            <li><a href="#petra">البتراء</a></li>
+            <li><a href="#wadi-rum">وادي رم</a></li>
+            <li><a href="#dead-sea">البحر الميت</a></li>
+            <li><a href="#jerash">جرش</a></li>
+            <li><a href="#amman">قلعة عمّان</a></li>
+        </ul>
+    </nav>
+
+    <!-- ===== نظرة عامة ===== -->
+    <section class="section" id="attractions">
+        <h2 class="section-title">أشهر المعالم السياحية</h2>
+        <p class="section-subtitle">خمسة وجهات لا غنى عنها في أي رحلة إلى الأردن</p>
+
+        <div class="cards">
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1551171128-c5b124a4174c?w=700&q=80" alt="البتراء">
+                <div class="card-body">
+                    <h3>البتراء</h3>
+                    <p>المدينة الوردية المنحوتة في الصخر، إحدى عجائب الدنيا السبع الجديدة.</p>
+                    <a href="#petra">اقرأ المزيد ←</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1666689468289-bd7ae53d5ba9?w=700&q=80" alt="وادي رم">
+                <div class="card-body">
+                    <h3>وادي رم</h3>
+                    <p>وادي القمر، صحراء ساحرة بجبالها الرملية الحمراء وسمائها الصافية.</p>
+                    <a href="#wadi-rum">اقرأ المزيد ←</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.unsplash.com/photo-1726001739725-cfd1902b2a2b?w=700&q=80" alt="البحر الميت">
+                <div class="card-body">
+                    <h3>البحر الميت</h3>
+                    <p>أخفض نقطة على سطح الأرض، حيث يمكنك الطفو بسهولة بفضل الملوحة العالية.</p>
+                    <a href="#dead-sea">اقرأ المزيد ←</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Jerash_Roman_Ruins.jpg/700px-Jerash_Roman_Ruins.jpg" alt="جرش">
+                <div class="card-body">
+                    <h3>جرش</h3>
+                    <p>واحدة من أفضل المدن الرومانية المحفوظة في العالم.</p>
+                    <a href="#jerash">اقرأ المزيد ←</a>
+                </div>
+            </div>
+
+            <div class="card">
+                <img src="https://images.pexels.com/photos/11618768/pexels-photo-11618768.jpeg?auto=compress&cs=tinysrgb&w=700" alt="قلعة عمان">
+                <div class="card-body">
+                    <h3>قلعة عمّان</h3>
+                    <p>أقدم جزء في العاصمة، يضم معبد هرقل والقصر الأموي.</p>
+                    <a href="#amman">اقرأ المزيد ←</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== البتراء ===== -->
+    <section class="section" id="petra">
+        <div class="attraction">
+            <div class="attraction-header" style="background-image: url('https://images.unsplash.com/photo-1551171128-c5b124a4174c?w=1400&q=80');">
+                <h2>البتراء</h2>
+            </div>
+            <div class="attraction-content">
+                <p>
+                    تُعد <strong>البتراء</strong> أشهر المعالم السياحية في الأردن وأكثرها زيارة. بُنيت على يد الأنباط قبل أكثر من ألفي عام، وهي مدينة كاملة منحوتة في الصخور الوردية والحمراء. أُدرجت ضمن قائمة التراث العالمي لليونسكو عام 1985، وصُنفت كإحدى عجائب الدنيا السبع الجديدة.
+                </p>
+
+                <div class="info-box">
+                    <strong>موقعها:</strong> جنوب الأردن، قرب مدينة وادي موسى<br>
+                    <strong>أفضل وقت للزيارة:</strong> الربيع (مارس - مايو) والخريف (سبتمبر - نوفمبر)<br>
+                    <strong>مدة الزيارة الموصى بها:</strong> يوم كامل على الأقل
+                </div>
+
+                <h3 style="color:#8B4513; margin:25px 0 12px;">أبرز المعالم داخل البتراء</h3>
+                <p><strong>السيق:</strong> ممر ضيق طويل بين الجبال يصل طوله إلى حوالي 1.2 كم، وهو المدخل الرئيسي للمدينة. عند نهايته تظهر الخزنة فجأة في مشهد مذهل.</p>
+                <p><strong>الخزنة (الخزينة):</strong> أشهر معلم في البتراء، واجهة منحوتة بإتقان في الصخر الوردي. يُعتقد أنها كانت مقبرة لأحد ملوك الأنباط.</p>
+                <p><strong>الدير:</strong> معلم ضخم يقع في أعلى الجبل، ويحتاج إلى صعود حوالي 800 درجة للوصول إليه. يُفضل زيارته بعد الظهر لإضاءة أفضل.</p>
+                <p><strong>المسرح الروماني والمقابر الملكية وشارع الأعمدة:</strong> كلها جزء من المدينة الأثرية التي تستحق الاستكشاف بهدوء.</p>
+
+                <div class="gallery">
+                    <img src="https://images.unsplash.com/photo-1551171128-c5b124a4174c?w=600&q=80" alt="الخزنة">
+                    <img src="https://images.unsplash.com/photo-1587595431973-160d0d94add1?w=600&q=80" alt="السيق">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2b/Petra_Jordan_3.jpg/600px-Petra_Jordan_3.jpg" alt="منظر عام">
+                </div>
+
+                <div class="tips">
+                    <h4>نصائح للزيارة</h4>
+                    <p>ارتدِ حذاءً مريحاً للمشي، واحمل ماءً كافياً وقبعة خاصة في الصيف. يُفضل الوصول مبكراً لتجنب الزحام. يمكن شراء تذكرة البتراء ضمن "Jordan Pass" التي تشمل عدة مواقع أخرى.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== وادي رم ===== -->
+    <section class="section" id="wadi-rum">
+        <div class="attraction">
+            <div class="attraction-header" style="background-image: url('https://images.unsplash.com/photo-1666689468289-bd7ae53d5ba9?w=1400&q=80');">
+                <h2>وادي رم</h2>
+            </div>
+            <div class="attraction-content">
+                <p>
+                    يُلقب <strong>وادي رم</strong> بـ"وادي القمر" بسبب تضاريسه المذهلة التي تشبه سطح القمر. يقع في جنوب الأردن ويُعد من أجمل الصحاري في العالم. أُدرج ضمن قائمة التراث العالمي لليونسكو، واشتهر عالمياً بعد تصوير أفلام عالمية فيه مثل "لورانس العرب" وأفلام عن المريخ.
+                </p>
+
+                <div class="info-box">
+                    <strong>موقعها:</strong> جنوب الأردن، على بعد حوالي ساعة ونصف من البتراء<br>
+                    <strong>أفضل تجربة:</strong> قضاء ليلة في مخيم بدوي تحت النجوم<br>
+                    <strong>الأنشطة:</strong> جولات بالسيارات الرباعية، ركوب الجمال، تسلق الصخور، مراقبة النجوم
+                </div>
+
+                <h3 style="color:#8B4513; margin:25px 0 12px;">لماذا يزور الناس وادي رم؟</h3>
+                <p>الجبال الرملية الحمراء والبرتقالية ترتفع بشكل درامي من الرمال، والممرات الضيقة والأقواس الطبيعية تخلق مناظر خلابة. السماء ليلاً من أوضح السماء في المنطقة، مما يجعل مراقبة النجوم تجربة لا تُنسى.</p>
+                <p>يعيش البدو في المنطقة منذ قرون، ويقدمون تجربة أصيلة من خلال المخيمات التقليدية التي تشمل عشاء الزرب (لحم مطبوخ تحت الرمال) وموسيقى بدوية.</p>
+
+                <div class="gallery">
+                    <img src="https://images.unsplash.com/photo-1666689468289-bd7ae53d5ba9?w=600&q=80" alt="وادي رم">
+                    <img src="https://images.unsplash.com/photo-1523920280034-97551085d55a?w=600&q=80" alt="جبال رم">
+                    <img src="https://images.unsplash.com/photo-1606771968110-7d29757e0ab2?w=600&q=80" alt="صحراء رم">
+                </div>
+
+                <div class="tips">
+                    <h4>نصائح للزيارة</h4>
+                    <p>يُفضل حجز مخيم مسبقاً خاصة في مواسم الذروة. ارتدِ ملابس مريحة واحمل واقياً من الشمس. الجولات بالسيارات الرباعية هي الطريقة الأفضل لاستكشاف المنطقة. يمكن الجمع بين زيارة وادي رم والبتراء بسهولة في يومين.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== البحر الميت ===== -->
+    <section class="section" id="dead-sea">
+        <div class="attraction">
+            <div class="attraction-header" style="background-image: url('https://images.unsplash.com/photo-1726001739725-cfd1902b2a2b?w=1400&q=80');">
+                <h2>البحر الميت</h2>
+            </div>
+            <div class="attraction-content">
+                <p>
+                    يقع <strong>البحر الميت</strong> على الحدود الغربية للأردن، ويُعد أخفض نقطة على سطح الأرض (حوالي 430 متراً تحت مستوى سطح البحر). مياهه مالحة جداً (نحو 10 أضعاف ملوحة البحار العادية)، مما يجعل الطفو عليها سهلاً وممتعاً.
+                </p>
+
+                <div class="info-box">
+                    <strong>الارتفاع:</strong> حوالي 430 متراً تحت سطح البحر<br>
+                    <strong>المسافة من عمّان:</strong> حوالي ساعة بالسيارة<br>
+                    <strong>الأنشطة:</strong> الطفو، الطين العلاجي، الاسترخاء في المنتجعات
+                </div>
+
+                <h3 style="color:#8B4513; margin:25px 0 12px;">لماذا يزور الناس البحر الميت؟</h3>
+                <p>التجربة الأشهر هي الطفو على سطح الماء دون جهد. كما يشتهر الطين الأسود الغني بالمعادن الذي يُستخدم للعناية بالبشرة. المنطقة مليئة بالمنتجعات الفاخرة التي تقدم خدمات الاستجمام والعلاج بالمياه والطين.</p>
+                <p>بالإضافة إلى الطفو، يمكن الاستمتاع بإطلالات رائعة على الجبال المحيطة وغروب الشمس الجميل فوق المياه.</p>
+
+                <div class="gallery">
+                    <img src="https://images.unsplash.com/photo-1726001739725-cfd1902b2a2b?w=600&q=80" alt="البحر الميت">
+                    <img src="https://images.pexels.com/photos/30889867/pexels-photo-30889867.jpeg?auto=compress&cs=tinysrgb&w=600" alt="شاطئ البحر الميت">
+                    <img src="https://images.unsplash.com/photo-1581614786625-4ce72ce64d02?w=600&q=80" alt="غروب البحر الميت">
+                </div>
+
+                <div class="tips">
+                    <h4>نصائح مهمة</h4>
+                    <p>لا تبقَ في الماء أكثر من 15-20 دقيقة في كل مرة، واغسل جسمك جيداً بعد الخروج. تجنب ملامسة العينين بالماء المالح. يُفضل زيارة المنتجعات التي توفر شواطئ خاصة ومرافق للاستحمام. أفضل الأوقات هي الصباح الباكر أو وقت الغروب.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== جرش ===== -->
+    <section class="section" id="jerash">
+        <div class="attraction">
+            <div class="attraction-header" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Jerash_Roman_Ruins.jpg/1200px-Jerash_Roman_Ruins.jpg');">
+                <h2>جرش</h2>
+            </div>
+            <div class="attraction-content">
+                <p>
+                    تُعد <strong>جرش</strong> (أو جراسا قديماً) من أفضل المدن الرومانية المحفوظة خارج إيطاليا. تقع شمال العاصمة عمّان على بعد حوالي ساعة بالسيارة، وتتميز بشوارعها المعمدة وساحاتها ومسارحها التي تعود إلى العصر الروماني.
+                </p>
+
+                <div class="info-box">
+                    <strong>موقعها:</strong> شمال الأردن، على بعد حوالي 48 كم من عمّان<br>
+                    <strong>مدة الزيارة:</strong> من 2 إلى 3 ساعات<br>
+                    <strong>أبرز المعالم:</strong> الساحة البيضاوية، شارع الأعمدة، المسارح، معبد أرتميس
+                </div>
+
+                <h3 style="color:#8B4513; margin:25px 0 12px;">أبرز المعالم في جرش</h3>
+                <p><strong>الساحة البيضاوية (Oval Plaza):</strong> ساحة واسعة محاطة بأعمدة، من أجمل المناظر في المدينة الأثرية.</p>
+                <p><strong>شارع الأعمدة (Cardo Maximus):</strong> الشارع الرئيسي الطويل المزين بالأعمدة على الجانبين، كان قلب الحياة في المدينة.</p>
+                <p><strong>المسرح الجنوبي والمسرح الشمالي:</strong> مسارح رومانية كبيرة لا تزال حالتها جيدة، وتُستخدم أحياناً في الفعاليات الثقافية.</p>
+                <p><strong>معبد أرتميس وبوابة هادريان:</strong> معالم مهمة تعكس عظمة العمارة الرومانية في المنطقة.</p>
+
+                <div class="gallery">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Jerash_Roman_Ruins.jpg/600px-Jerash_Roman_Ruins.jpg" alt="أعمدة جرش">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/Ancient_Roman_City_-_Jerash.jpg/600px-Ancient_Roman_City_-_Jerash.jpg" alt="آثار جرش">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/Ancient_city_of_Jerash.JPG/600px-Ancient_city_of_Jerash.JPG" alt="منظر عام لجرش">
+                </div>
+
+                <div class="tips">
+                    <h4>نصائح للزيارة</h4>
+                    <p>يُفضل زيارة جرش في الصباح الباكر لتجنب الحر. ارتدِ حذاءً مريحاً لأن المشي كثير داخل الموقع. يمكن الجمع بينها وبين زيارة قلعة عجلون في نفس اليوم. الدخول مشمول في تذكرة Jordan Pass.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== قلعة عمّان ===== -->
+    <section class="section" id="amman">
+        <div class="attraction">
+            <div class="attraction-header" style="background-image: url('https://images.pexels.com/photos/11618768/pexels-photo-11618768.jpeg?auto=compress&cs=tinysrgb&w=1400');">
+                <h2>قلعة عمّان</h2>
+            </div>
+            <div class="attraction-content">
+                <p>
+                    تقع <strong>قلعة عمّان</strong> (جبل القلعة) على أعلى تلة في وسط العاصمة، وتُعد من أقدم المواقع المأهولة في المدينة. تضم آثاراً من عصور مختلفة: الرومانية والبيزنطية والأموية، وتوفر إطلالة بانورامية رائعة على عمّان القديمة والحديثة.
+                </p>
+
+                <div class="info-box">
+                    <strong>موقعها:</strong> وسط عمّان، جبل القلعة<br>
+                    <strong>مدة الزيارة:</strong> من ساعة إلى ساعتين<br>
+                    <strong>أبرز المعالم:</strong> معبد هرقل، القصر الأموي، المتحف الأثري
+                </div>
+
+                <h3 style="color:#8B4513; margin:25px 0 12px;">أبرز المعالم داخل القلعة</h3>
+                <p><strong>معبد هرقل:</strong> أعمدة ضخمة تعود إلى العصر الروماني، ومن أشهر رموز عمّان. يُقال إن التمثال كان عملاقاً، ولم يتبقَ منه سوى أجزاء قليلة.</p>
+                <p><strong>القصر الأموي:</strong> مجمع قصور يعود إلى العصر الأموي، يتميز بقاعاته ومداخله المزخرفة.</p>
+                <p><strong>المتحف الأثري الأردني:</strong> يعرض قطعاً أثرية مهمة من مختلف مناطق الأردن، بما في ذلك تماثيل عين غزال الشهيرة.</p>
+                <p>بالقرب من القلعة يوجد <strong>المسرح الروماني</strong> في وسط البلد، وهو من أكبر المسارح في المنطقة ولا يزال يُستخدم في الفعاليات الثقافية.</p>
+
+                <div class="gallery">
+                    <img src="https://images.pexels.com/photos/11618768/pexels-photo-11618768.jpeg?auto=compress&cs=tinysrgb&w=600" alt="معبد هرقل">
+                    <img src="https://images.pexels.com/photos/5751737/pexels-photo-5751737.jpeg?auto=compress&cs=tinysrgb&w=600" alt="القصر الأموي">
+                    <img src="https://images.pexels.com/photos/18298731/pexels-photo-18298731.jpeg?auto=compress&cs=tinysrgb&w=600" alt="أعمدة القلعة">
+                </div>
+
+                <div class="tips">
+                    <h4>نصائح للزيارة</h4>
+                    <p>أفضل وقت للزيارة هو بعد الظهر للاستمتاع بالإضاءة الجميلة والإطلالة. يمكن الجمع بين زيارة القلعة والمسرح الروماني ووسط البلد في نفس اليوم. الدخول مشمول في تذكرة Jordan Pass.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== الفوتر ===== -->
+    <footer>
+        <p>© 2026 معالم الأردن السياحية | تم التصميم لأغراض تعليمية</p>
+        <p style="margin-top:10px; font-size:0.95rem; opacity:0.8;">صفحة واحدة تحتوي على جميع المعالم السياحية الرئيسية في الأردن</p>
+    </footer>
+
+</body>
+</html>
